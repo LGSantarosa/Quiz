@@ -8,6 +8,7 @@ const btnRestart = document.querySelector(".finish button");
 const main = document.querySelector("main");
 
 
+
 import questions from "./questions.js";
 
 let currentIndex = 0;
@@ -29,41 +30,63 @@ function nextQuestion(e) {
   var imagem = document.getElementById('imagem')
 
   if (e.target.getAttribute("data-correct") === "true") {
-    questionsCorrect++;
-    main.style.backgroundColor = "white"
+    questionsCorrect++ 
   }
+
 
   if (currentIndex < questions.length - 1) {
     if (e.target.getAttribute("data-correct") === "true") {
       currentIndex++;
-      loadQuestion();
+      main.style.transition = 0.5;
+      main.style.backgroundColor = "green";
+      setTimeout(function() {loadQuestion(); main.style.backgroundColor = "white";
+      if (spnQtd.textContent == "2/5"){
+        imagem.src = "unnamed.jpg"
+      }
+      if (spnQtd.textContent == "3/5"){
+        imagem.src = "chaves.jpeg"
+      } 
+      if (spnQtd.textContent == "4/5"){
+        imagem.src = "rayquaza.png"
+      } 
+      if (spnQtd.textContent == "5/5"){
+        imagem.src = "Carla.jpeg"
+      } }, 1000);
     }
+    
     else{
+      currentIndex++;
+      main.style.transition = 0.5;
       main.style.backgroundColor = "red"
+      setTimeout(function() {loadQuestion(); main.style.backgroundColor = "white";
+        if (spnQtd.textContent == "2/5"){
+          imagem.src = "unnamed.jpg"
+        }
+        if (spnQtd.textContent == "3/5"){
+          imagem.src = "chaves.jpeg"
+        } 
+        if (spnQtd.textContent == "4/5"){
+          imagem.src = "rayquaza.png"
+        } 
+        if (spnQtd.textContent == "5/5"){
+          imagem.src = "Carla.jpeg"
+        } }, 1000);
     }
-   
     
   } else {
-    main.style.backgroundColor = "white"
-    finish();
-  }
-
- 
-
- 
-  if (spnQtd.textContent == "2/5"){
-    imagem.src = "unnamed.jpg"
-  }
-  if (spnQtd.textContent == "3/5"){
-    imagem.src = "chaves.jpeg"
-  } 
-  if (spnQtd.textContent == "4/5"){
-    imagem.src = "rayquaza.png"
-  } 
-  if (spnQtd.textContent == "5/5"){
-    imagem.src = "Carla.jpeg"
+    if (e.target.getAttribute("data-correct") === "true") {
+      currentIndex++;
+      main.style.transition = 0.5;
+      main.style.backgroundColor = "green";
+      setTimeout(function() { main.style.backgroundColor = "white"; finish()},1000)
+    } else {
+      main.style.backgroundColor = "red"
+      setTimeout(function() {main.style.backgroundColor = "white"; finish()}, 1000)
+    }
   }
 }
+
+
 
 function finish() {
   textFinish.innerHTML = `você acertou ${questionsCorrect} de ${questions.length}`;
